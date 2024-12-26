@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Albums Homepage - Welcome to My Music Store</title>
+    <style>
+        body {
+            width: 800px;
+            margin: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-buttons form {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to My Music Store</h1>
+</header>
+<main>
+    <div th:if="${hasError}" class="alert alert-danger" role="alert">
+        <span th:text="${error}"></span>
+    </div>
+    <h2>Albums</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Genre</th>
+            <th>Release Year</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="album : ${albums}">
+            <td th:text="${album.getName()}"></td>
+            <td th:text="${album.getGenre()}"></td>
+            <td th:text="${album.getReleaseYear()}"></td>
+            <td class="action-buttons">
+                <a th:href="@{'/albums/details/{id}' (id=${album.getId()})}" sec:authorize="isAuthenticated()" class="edit-button">Details</a>
+                <a th:href="@{'/albums/edit/{id}' (id=${album.getId()})}" sec:authorize="isAuthenticated()" class="edit-button">Edit</a>
+                <a th:href="@{'/albums/delete/{id}' (id=${album.getId()})}" sec:authorize="isAuthenticated()" class="delete-button">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <a th:href="@{'/albums/add-form'}" class="edit-button">Add album</a>
+</main>
+</body>
+</html>

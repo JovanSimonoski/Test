@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Album Details</title>
+
+</head>
+<body>
+<header>
+    <h1 th:text="${album.getName()}"></h1>
+</header>
+<section>
+    <h2 th:text="${album.getGenre()}"></h2>
+    <h2 th:text="${album.getReleaseYear()}"></h2>
+    <h2>Songs:</h2>
+    <ul>
+        <li th:each="song : ${songs}" th:text="${song.getTitle()}"></li>
+    </ul>
+</section>
+<a th:href="@{'/albums'}" class="edit-button">Back to albums</a>
+</body>
+</html>

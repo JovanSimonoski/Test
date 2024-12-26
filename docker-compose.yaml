@@ -1,0 +1,13 @@
+version: "3"
+services:
+  wp-db:
+    image: "postgres"
+    container_name: "wp-lab"
+    environment:
+      - POSTGRES_USER=jovan
+      - POSTGRES_PASSWORD=jovan
+      - POSTGRES_DB=lab
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data      
